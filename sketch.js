@@ -1,15 +1,7 @@
 
-  var mic, fft;
-  var startTri = document.getElementById('starttri');
-  var stopTri = document.getElementById('stoptri');
-  var startSaw = document.getElementById('startsaw');
-  var stopSaw = document.getElementById('stopsaw');
-  var startSqr = document.getElementById('startsqr');
-  var stopSqr = document.getElementById('stopsqr');
-
-
   // Attribution for creating 2 separate draw fields: http://www.joemckaystudio.com/multisketches/
 
+  var mic, fft;
 
   // Sketch One - create audio input, analyse and visualize
   var s = function( p ) { // p could be any variable name
@@ -17,8 +9,25 @@
     p.setup = function() {
       p.createCanvas(1000, 200);
       p.noFill();
+
+      //MICROPHONE
       mic = new p5.AudioIn();
       mic.start();
+
+      //MIC On BUTTON
+      var micOn = document.getElementById('micon');
+      micOn.addEventListener('click', function(e){
+        e.preventDefault();
+        mic.start();
+      });
+
+      //MIC OFF BUTTON
+      var micOff = document.getElementById('micoff');
+      micOff.addEventListener('click', function(e){
+        e.preventDefault();
+        mic.stop();
+      });
+
       fft = new p5.FFT();
       fft.setInput(mic);
     };
@@ -43,6 +52,10 @@
     p.setup = function() {
       p.createCanvas(1000, 200);
 
+      sinosc = new p5.Oscillator();
+      sinosc.setType('sine');
+      sinosc.amp(.5);
+
       triosc = new p5.Oscillator(); // set frequency and type
       triosc.setType('triangle');
       triosc.amp(.5);
@@ -55,47 +68,136 @@
       sqrosc.setType('square');
       sqrosc.amp(.5);
 
+
       // **** ON - only oscillator / OFF - only mic ****
       // fft = new p5.FFT();
 
+
       // start/stop click events for 3 oscillators buttons
-      // Triangle
-      startTri.addEventListener('click', function(e) {
+      //sine
+      var startSin = document.getElementById('startsin');
+      startSin.addEventListener('click', function(e) {
         e.preventDefault();
-        triosc.start();
+        sinosc.start();
+        triosc.stop();
         sawosc.stop();
         sqrosc.stop();
       });
 
+      var stopSin = document.getElementById('stopsin');
+      stopSin.addEventListener('click', function(e) {
+        e.preventDefault();
+        sinosc.stop();
+      });
+
+      // Triangle
+      var startTri = document.getElementById('starttri');
+      startTri.addEventListener('click', function(e) {
+        e.preventDefault();
+        triosc.start();
+        sinosc.stop();
+        sawosc.stop();
+        sqrosc.stop();
+      });
+
+      var stopTri = document.getElementById('stoptri');
       stopTri.addEventListener('click', function(e) {
         e.preventDefault();
         triosc.stop();
       });
 
       // Sawtooth
+      var startSaw = document.getElementById('startsaw');
       startSaw.addEventListener('click', function(e) {
         e.preventDefault();
         sawosc.start();
+        sinosc.stop();
         triosc.stop();
         sqrosc.stop();
       });
 
+      var stopSaw = document.getElementById('stopsaw');
       stopSaw.addEventListener('click', function(e) {
         e.preventDefault();
         sawosc.stop();
       });
 
       // Square
+      var startSqr = document.getElementById('startsqr');
       startSqr.addEventListener('click', function(e) {
         e.preventDefault();
         sqrosc.start();
+        sinosc.stop();
         triosc.stop();
         sawosc.stop();
       });
 
+      var stopSqr = document.getElementById('stopsqr');
       stopSqr.addEventListener('click', function(e) {
         e.preventDefault();
         sqrosc.stop();
+      });
+
+
+      //NOISE
+      //WHITE
+      whitenoise = new p5.Noise();
+      whitenoise.setType('white');
+      whitenoise.amp(.5)
+
+      //BROWN
+      brownnoise = new p5.Noise();
+      brownnoise.setType('brown');
+      brownnoise.amp(.5)
+
+      //PINK
+      pinknoise = new p5.Noise();
+      pinknoise.setType('pink');
+      pinknoise.amp(.5)
+
+      //WHITE NOISE BUTTONS
+      var startWhNoise = document.getElementById('startwhnoise');
+      startWhNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        whitenoise.start();
+        brownnoise.stop();
+        pinknoise.stop();
+      });
+
+      var stopWhNoise = document.getElementById('stopwhnoise');
+      stopWhNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        whitenoise.stop();
+      });
+
+      //BROWN NOISE BUTTONS
+      var startBrNoise = document.getElementById('startbrnoise');
+      startBrNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        brownnoise.start();
+        whitenoise.stop();
+        pinknoise.stop();
+      });
+
+      var stopBrNoise = document.getElementById('stopbrnoise');
+      stopBrNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        brownnoise.stop();
+      });
+
+      //PINK NOISE BUTTONS
+      var startPkNoise = document.getElementById('startpknoise');
+      startPkNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        pinknoise.start();
+        brownnoise.stop();
+        whitenoise.stop();
+      });
+
+      var stopPkNoise = document.getElementById('stoppknoise');
+      stopPkNoise.addEventListener('click', function(e){
+        e.preventDefault();
+        pinknoise.stop();
       });
     };
 
@@ -114,14 +216,20 @@
 
       // change oscillator frequency based on mouseX
       var freq = p.map(p.mouseX, 0, p.width, 20, 20000);
+      sinosc.freq(freq);
       triosc.freq(freq);
       sawosc.freq(freq);
       sqrosc.freq(freq);
 
+      // change amplification of oscillators and noises based on mouseY
       var amp = p.map(p.mouseY, 0, p.height, 1, .01);
+      sinosc.amp(amp);
       triosc.amp(amp);
       sawosc.amp(amp);
       sqrosc.amp(amp);
+      whitenoise.amp(amp);
+      brownnoise.amp(amp);
+      pinknoise.amp(amp);
 
     };
   };

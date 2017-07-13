@@ -16,43 +16,68 @@
     <h1>Sounds with Steve</h1>
     <p>Play an oscillator and move your mouse to experience the full spectrum of sound (20 hz - 20k hz) - or, have fun with your computer's built-in mic..don't forget to turn your sound on!</p>
 
-    <br>
+    <h2>Wavelength Shape</h2>
+
+    <div id="c2"></div>
+
+    <h2>Frequency Visualizer</h2>
+
+    <div id="c1"></div>
 
     <div class="container">
 
       <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 triangle">
+          <p>Sinewav Oscillator</p>
+          <button type="button" name="button" id="startsin">Start</button>
+          <button type="button" name="button" id="stopsin">Stop</button>
+        </div>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 triangle">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 triangle">
           <p>Triangle Oscillator</p>
           <button type="button" name="button" id="starttri">Start</button>
           <button type="button" name="button" id="stoptri">Stop</button>
         </div>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 sawtooth">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 sawtooth">
           <p>Sawtooth Oscillator</p>
           <button type="button" name="button" id="startsaw">Start</button>
           <button type="button" name="button" id="stopsaw">Stop</button>
         </div>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 square">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 square">
           <p>Square Oscillator</p>
           <button type="button" name="button" id="startsqr">Start</button>
           <button type="button" name="button" id="stopsqr">Stop</button>
         </div>
+      </div>
 
+      <br>
+
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 whnoise">
+          <p>White Noise</p>
+          <button type="button" name="button" id="startwhnoise">Start</button>
+          <button type="button" name="button" id="stopwhnoise">Stop</button>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 brnoise">
+          <p>Brown Noise</p>
+          <button type="button" name="button" id="startbrnoise">Start</button>
+          <button type="button" name="button" id="stopbrnoise">Stop</button>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pknoise">
+          <p>Pink Noise</p>
+          <button type="button" name="button" id="startpknoise">Start</button>
+          <button type="button" name="button" id="stoppknoise">Stop</button>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pknoise">
+          <p>Mic Control</p>
+          <button type="button" name="button" id="micon">On</button>
+          <button type="button" name="button" id="micoff">Off</button>
+        </div>
       </div>
 
     </div>
-
-    <br><br>
-
-    <h2>Sine Wave Shape</h2>
-
-    <div id="c2"></div> <br>
-
-    <h2>Frequency Visualizer</h2>
-
-    <div id="c1"></div> <br>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
