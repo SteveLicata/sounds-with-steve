@@ -11,7 +11,9 @@ h1 {
 
 h2, p {
   text-align: center;
-  font-family: 'Amatic SC', cursive;
+  /* font-family: 'Amatic SC', cursive; */
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+
 }
 
 p {
